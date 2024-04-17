@@ -1,0 +1,8 @@
+<div class="input-container">
+  <input [type]="type" [placeholder]="placeholder" id="label" />
+  <div *ngIf="type === 'password'">
+    <span (click)="showPassword()">{{
+      isPasswordVisible ? "Hide" : "Show"
+    }}</span>
+  </div>
+</div>
