@@ -27,7 +27,7 @@
   align-self: flex-start;
   border: 1px solid black;
   margin: 0;
-  height: 55px;
+  height: 150px;
   /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -60,4 +60,14 @@
 .product-info p {
   margin: 0;
   padding: 0;
+}
+
+.view-product-link {
+  cursor: pointer;
+  margin: 10px 0;
+  color: #4400ff
+}
+
+.view-product-link:hover {
+  text-decoration: underline;
 }

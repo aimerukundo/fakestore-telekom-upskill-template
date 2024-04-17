@@ -12,6 +12,8 @@
         <p>
           Rating: {{ product.rating.rate }} ({{ product.rating.count }} ratings)
         </p>
+        <div [routerLink]="['/products', product.id]" class="view-product-link">View poduct</div>
+        <button >Add to cart</button>
       </div>
     </div>
   </div>

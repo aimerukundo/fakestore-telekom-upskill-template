@@ -1,0 +1,20 @@
+<main class="product-container-detail">
+  <div class="product-detail">
+    <img [src]="product?.image" alt="{{ product?.title }}" />
+    <h1>{{ product?.title }}</h1>
+    <div class="description">
+      <p>{{ product?.description }}</p>
+    </div>
+    <div class="product-info">
+      <p>Price: ${{ product?.price }}</p>
+      <p>Category: {{ product?.category }}</p>
+      <p>
+        Rating: {{ product?.rating?.rate }} ({{
+          product?.rating?.count
+        }}
+        ratings)
+      </p>
+      <button>Add to cart</button>
+    </div>
+  </div>
+</main>
