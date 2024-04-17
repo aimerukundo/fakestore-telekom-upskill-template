@@ -1,0 +1,43 @@
+<div class="modal" [ngClass]="{ hidden: !authModalService.visible }">
+  <div class="modal-header">
+    <h2>Login</h2>
+    <div class="close-icon" (click)="authModalService.closeModal()">
+      &#x2715;
+    </div>
+  </div>
+  <div *ngIf="showAlert" >
+    <div class="alert" ngClass="{{ alertClass }}">
+      {{ alertMessage }}
+    </div>
+  </div>
+  <div class="modal-body">
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Your email"
+          name="email"
+          #email="ngModel"
+          [(ngModel)]="credentials.email"
+        />
+      </div>
+
+      <!-- <app-input label="email" placeholder="Your email" type="email"></app-input> -->
+      <div class="input-container">
+        <input
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          placeholder="Your password"
+          name="password"
+          #password="ngModel"
+          [(ngModel)]="credentials.password"
+        />
+        <div class="show-password">
+          <span (click)="showPassword()">{{
+            isPasswordVisible ? "Hide" : "Show"
+          }}</span>
+        </div>
+      </div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+  </div>
+</div>
