@@ -8,6 +8,7 @@ import { IProduct } from '../types/product.type';
 })
 export class ProductService {
   private apiUrl = 'https://fakestoreapi.com';
+  private products: IProduct[] = [];
 
   constructor(private http: HttpClient) {}
 
