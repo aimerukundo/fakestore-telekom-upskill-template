@@ -10,6 +10,7 @@ import { IProduct } from '../types/product.type';
 export class CartComponent {
   products: IProduct[] = []
   constructor(public cartService: CartService){
-    console.log(cartService.getCart())
   }
+
+  
 }

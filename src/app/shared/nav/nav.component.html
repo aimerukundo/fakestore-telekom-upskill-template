@@ -1,8 +1,8 @@
 <nav>
     <ul>
-        <li><a href="">Home</a></li>
-        <li (click)="openAuthModal()">Login</li>
-        <li (click)="authService.logout()">Logout</li>
-        <li [routerLink]="['cart']">cart</li>
+        <li [routerLink]="['/']" >Home</li>
+        <li (click)="checkLogin(['cart'])">Cart</li>
+        <li (click)="openAuthModal()" *ngIf="!user.name">Login</li>
+        <li (click)="logoutUser()" *ngIf="user.name">Logout</li>
     </ul>
 </nav>

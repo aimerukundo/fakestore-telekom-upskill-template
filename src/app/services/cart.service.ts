@@ -9,11 +9,11 @@ export class CartService {
 
   constructor() {}
 
-  addToCart(product: IProduct) {
+  addToCart(product: IProduct | null) {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     if (cart.length > 0) {
       const existingProduct = cart.find(
-        (item: IProduct) => item.id === product.id
+        (item: IProduct) => item.id === product?.id
       );
       if (existingProduct) {
         existingProduct.cart++;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { IProduct } from '../types/product.type';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,7 +13,8 @@ export class ProductDetailComponent {
   public product: IProduct | null = null;
   constructor(
     private route: ActivatedRoute,
-    public productService: ProductService
+    public productService: ProductService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +34,20 @@ export class ProductDetailComponent {
       });
       // You can now use the id in your component logic
     });
+  }
+
+  addProductToCart(product: IProduct | null) {
+    const products = JSON.parse(localStorage.getItem('products') || '[]')
+
+    const modifiedProducts = products.map((item: IProduct) => {
+      if (item.id === product?.id) {
+        product.cart = product.cart + 1
+        return product
+      }
+      return item
+    })
+    // console.log(modifiedProducts)
+    localStorage.setItem('products', JSON.stringify(modifiedProducts))
+    this.cartService.addToCart(product)
   }
 }

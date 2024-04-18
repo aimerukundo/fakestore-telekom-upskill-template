@@ -1,0 +1,21 @@
+nav ul{
+  border-bottom: 1px solid #b2b1b2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  height: 50px;
+}
+
+nav ul li{
+  cursor: pointer;
+  color: #4400ff
+
+}
+
+nav ul li:hover{
+    text-decoration: underline;
+}

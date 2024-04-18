@@ -1,4 +1,5 @@
 <main class="product-container">
+  <h1 *ngIf="cartService?.getCart().length === 0">Your Cart is empty!</h1>
   <div *ngFor="let product of cartService?.getCart()">
     <div class="product-card">
       <img [src]="product.image" alt="{{ product.title }}" />
@@ -7,24 +8,25 @@
         <p>Price: ${{ product.price }}</p>
         <p>Category: {{ product.category }}</p>
         <p>
-          Rating: {{ product.rating.rate }} ({{ product.rating.count }} ratings)
+          Rating: {{ product.rating.rate }} ({{ product.rating.count }}
+          ratings)
         </p>
         <div [routerLink]="['/products', product.id]" class="view-product-link">
           View poduct
         </div>
         <div>
-          <span (click)="cartService.decreaseCart(product)">- </span>
+          <span (click)="cartService.decreaseCart(product)" class="icon">- </span>
           <span
             ><span *ngIf="product?.cart">({{ product?.cart }})</span></span
           >
-          <span (click)="cartService.increaseCart(product)"> +</span>
-          <button (click)="cartService.removeFromCart(product)">Remove</button>
+          <span (click)="cartService.increaseCart(product)" class="icon"> +</span>
+          <button (click)="cartService.removeFromCart(product)" class="btn primary">Remove</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="total-price">
-    <p>Total price: ${{ cartService.getTotalPrice() }}</p>
+  <div class="total-price" *ngIf="cartService.getTotalPrice()">
+    <p>Total price: <span>${{ cartService.getTotalPrice() }}</span> </p>
   </div>
 </main>
