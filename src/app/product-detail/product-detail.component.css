@@ -1,11 +1,19 @@
 
 .product-container-detail{
     border: 1px solid #b2b1b2;
+    /* margin: 30px; */
+    background-color: #fbfafc;
+}
+
+.product-detail{
     margin: 30px;
+    background-color: #fffeff;   
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 20px
 }
 
 .product-detail img {
-    border: 1px solid black;
     max-width: 100%;
     height: 400px;
     border-radius: 5px;
@@ -18,4 +26,25 @@
 
   .product-detail .description {
     max-width: 800px;
+  }
+
+  .primary {
+    background-color: #4400ff;
+    color: #fffeff;
+    
+  }
+  
+  .primary:hover {
+    background-color: #6933ff;
+    color: #fdfcfd;
+  }
+  
+  .btn {
+    padding: 6px 12px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    margin-top: 8px;
   }

@@ -3,6 +3,9 @@ import { ProductService } from '../services/product.service';
 import { IProduct } from '../types/product.type';
 import { CartService } from '../services/cart.service';
 import { map } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { AuthModalService } from '../services/auth-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +16,14 @@ export class HomeComponent implements OnInit {
   products: IProduct[] = [];
   scrollable = true;
   currentNumber = 6;
+  searchTerm = '';
 
   constructor(
     private productService: ProductService,
-    public cartService: CartService
+    public cartService: CartService,
+    public authService: AuthService,
+    public authModalService: AuthModalService,
+    private router: Router
   ) {
     this.productService
       .getProducts(this.currentNumber)
@@ -53,6 +60,31 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  checkLogin(link: unknown[]) {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.name) {
+      this.authModalService.openModal();
+      return
+    }
+    this.router.navigate(link)
+  }
+
+  search() {
+    const products: IProduct[] = JSON.parse(localStorage.getItem('products') || '[]');
+  // Filter products based on the search term (case-insensitive)
+  const searchResults: IProduct[] = products.filter((item: IProduct) =>
+    item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  this.products = searchResults;
+  console.log(this.searchTerm);
+  console.log(this.products);
+  }
+
+reset(){
+  this.searchTerm = '';
+  const products = JSON.parse(localStorage.getItem('products') || '[]');
+  this.products = products;
+}
   ngOnInit(): void {
     if (this.scrollable) {
       window.addEventListener('scroll', this.handleScroll);
@@ -145,6 +177,12 @@ export class HomeComponent implements OnInit {
   };
 
   addProductToCart(product: IProduct) {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.name) {
+      this.authModalService.openModal();
+      return
+    }
+    
     const products = JSON.parse(localStorage.getItem('products') || '[]')
     // console.log(products)
     const modifiedProducts = products.map((item: IProduct) => {
@@ -162,7 +200,7 @@ export class HomeComponent implements OnInit {
     if (this.scrollable) {
       window.removeEventListener('scroll', this.handleScroll);
     }
-    // this.products = [];
-    // localStorage.removeItem('products');
+    this.products = [];
+    localStorage.removeItem('products');
   }
 }

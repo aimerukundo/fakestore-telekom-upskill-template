@@ -1,19 +1,38 @@
-<main class="product-container">
-  <div *ngFor="let product of products">
-    <div class="product-card">
-      <img [src]="product.image" alt="{{ product.title }}" />
-      <h2>{{ product.title }}</h2>
-      <div class="description">
-        <p>{{ product.description }}</p>
-      </div>
-      <div class="product-info">
-        <p>Price: ${{ product.price }}</p>
-        <p>Category: {{ product.category }}</p>
-        <p>
-          Rating: {{ product.rating.rate }} ({{ product.rating.count }} ratings)
-        </p>
-        <div [routerLink]="['/products', product.id]" class="view-product-link">View poduct</div>
-        <button (click)="addProductToCart(product)">Add to cart <span *ngIf="product?.cart ">({{ product?.cart }})</span></button>
+<main [ngClass]="{ 'blur-background': authModalService.visible }">
+  <div class="search-container">
+    <div>
+      <input type="text" [(ngModel)]="searchTerm" />
+    </div>
+    <div class="btn-container">
+      <button (click)="search()" class="btn primary btn-primary-space">Search</button>
+      <button (click)="reset()" class="btn">Reset</button>
+    </div>
+  </div>
+  <div class="product-container">
+    <div *ngFor="let product of products">
+      <div class="product-card">
+        <img [src]="product.image" alt="{{ product.title }}" />
+        <h2>{{ product.title }}</h2>
+        <div class="description">
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="product-info">
+          <p>Price: ${{ product.price }}</p>
+          <p>Category: {{ product.category }}</p>
+          <p>
+            Rating: {{ product.rating.rate }} ({{ product.rating.count }}
+            ratings)
+          </p>
+          <div
+            class="view-product-link"
+            (click)="checkLogin(['/products', product.id])"
+          >
+            View poduct
+          </div>
+          <button (click)="addProductToCart(product)" class="btn primary">
+            Add to cart <span *ngIf="product?.cart">({{ product?.cart }})</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
