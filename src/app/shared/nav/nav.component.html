@@ -3,5 +3,6 @@
         <li><a href="">Home</a></li>
         <li (click)="openAuthModal()">Login</li>
         <li (click)="authService.logout()">Logout</li>
+        <li [routerLink]="['cart']">cart</li>
     </ul>
 </nav>
